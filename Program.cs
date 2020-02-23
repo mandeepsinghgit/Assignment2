@@ -233,15 +233,54 @@ namespace Assignment2_CT_Spring2020
             }
         }
 
-        /*    public static int GoldRod(int rodLength) { try {                 //Write Your Code Here
-                }
-                catch (Exception)
-                {
+        /*    
+        public static int GoldRod(int rodLength)
+        {
+            try
+            {
+                int[] output = new int[rodLength];
+                /*First, we calculate combinations of the length
+                with returning the maximum product.*/
+                return Combinations(1, rodLength, output, 0);
 
-                    throw;
-                }
-                return 0;
             }
+            catch (Exception e)
+            {
+                Console.WriteLine("Exception occured in GoldRod method:", e);
+            }
+            return 0;
+        }
+
+        static int product = 1;
+        private static int Combinations(int i, int n, int[] a, int index)
+        {
+            if (n == 0)
+            {
+                //Calculating the product of the combination.
+                int nproduct = FindtheProduct(a, index);
+                //If the new product is higher, save it
+                if (nproduct > product)
+                    product = nproduct;
+            }
+            //Getting combinations using recursion.
+            for (int j = i; j <= n; j++)
+            {
+                a[index] = j;
+                Combinations(j, n - j, a, index + 1);
+            }
+
+            //Returning the highest product out of them.
+            return product;
+
+        }
+        private static int FindtheProduct(int[] a, int n)
+        {
+            int x = 1;
+            for (int i = 0; i < n; i++)
+                x = x * a[i];
+            return x;
+        }
+    }
             public static bool DictSearch(string[] userDict, string keyword)
             {
                 try
